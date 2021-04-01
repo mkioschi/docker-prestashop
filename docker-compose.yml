@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+    depends_on:
+      - mysql
     volumes:
       - ./src:/var/www/html
       - ./src/modules:/var/www/html/modules
@@ -15,25 +17,24 @@ services:
       - ./src/override:/var/www/html/override
     environment:
       PS_DEV_MODE: 1
-      DB_SERVER: postgres
+      DB_SERVER: mysql
       DB_USER: devtest
       DB_PASSWD: devtest123
       DB_NAME: prestashop
       PS_INSTALL_AUTO: 0
     restart: on-failure
-
-  postgres:
-    container_name: postgres
+  mysql:
+    container_name: mysql
     build:
-      context: ./docker/postgres
+      context: ./docker/mysql
       dockerfile: Dockerfile
     ports:
-      - 5432:5432
+      - 3306:3306
     volumes:
-      - ./docker/postgres/data:/var/lib/postgresql/data
-      - ./docker/postgres/scripts:/etc/postgresql/scripts
+      - ./docker/mysql/data:/var/lib/mysql
     environment:
-      POSTGRES_DB: prestashop
-      POSTGRES_USER: devtest
-      POSTGRES_PASSWORD: devtest123
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: devtest
+      MYSQL_PASSWORD: devtest123
     restart: on-failure

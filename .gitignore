@@ -1,6 +1,5 @@
 src/*
-docker/postgres/data
-docker/postgres/scripts
+docker/mysql/data
 
 !.gitkeep
 
