@@ -1,6 +1,6 @@
 src/*
-./docker/postgres/data
-./docker/postgres/scripts
+docker/postgres/data
+docker/postgres/scripts
 
 !.gitkeep
 
