@@ -6,8 +6,8 @@ services:
     build:
       context: ./docker/prestashop
       dockerfile: Dockerfile
-      ports:
-        - 80:80
+    ports:
+      - 80:80
     volumes:
       - ./src:/var/www/html
       - ./src/modules:/var/www/html/modules
